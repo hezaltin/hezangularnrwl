@@ -1,0 +1,10 @@
+{
+  "name": "utah",
+  "type": "state/province",
+  "country": "United States",
+  "capitol": "Salt Lake City",
+  "population": {
+    "value": 3.102,
+    "unit": "million"
+  }
+}

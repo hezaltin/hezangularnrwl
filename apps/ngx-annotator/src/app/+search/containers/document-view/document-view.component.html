@@ -1,0 +1,12 @@
+<ng-container *ngIf="type$ | async as type" [ngSwitch]="type">
+  <app-patent-document *ngSwitchCase="'patent'" 
+    [loading]="loading$ | async"  
+    [error]="error$ | async"
+    [patent]="document$ | async">
+  </app-patent-document>
+  <app-news-document *ngSwitchCase="'news'"
+    [loading]="loading$ | async"  
+    [error]="error$ | async"
+    [news]="document$ | async">
+  </app-news-document>
+</ng-container>

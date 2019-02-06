@@ -1,0 +1,9 @@
+<p>
+  document-search-summary works!
+</p>
+
+<!-- <code>{{(documentSearch$|async)}}</code> -->
+
+<app-document-search-preview-list (selectedFromCollectionPreview)="selectedFromCollectionPreview($event)" [books]="documentSearch$ | async"></app-document-search-preview-list>
+
+

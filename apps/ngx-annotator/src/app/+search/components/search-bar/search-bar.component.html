@@ -1,0 +1,11 @@
+<div [formGroup]="searchForm" class="search-bar">
+  <button mat-icon-button>
+    <mat-icon aria-label="Search database">search</mat-icon>
+  </button>
+  <mat-form-field class="search-box" appearance="legacy" floatLabel="never">
+    <input #input matInput placeholder="Search in knowledge graph" autocomplete="off" formControlName="searchInput">
+  </mat-form-field>
+  <button mat-icon-button (click)="closeSearchBar()">
+    <mat-icon aria-label="Cancel search">close</mat-icon>
+  </button>
+</div>

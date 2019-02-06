@@ -1,0 +1,15 @@
+.search-bar {
+  height: 56px;
+  padding: 8px 16px 0;
+  background-color: #fff;
+  color: rgba(0,0,0,.87);
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  .search-box {
+    flex: 1 1 auto;
+  }
+}

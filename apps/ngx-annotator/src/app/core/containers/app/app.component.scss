@@ -1,0 +1,21 @@
+.container {
+  width: 100%;
+  align-items: stretch;
+}
+
+.container iframe {
+  width: 100%;
+  height: 100%;
+}
+
+.fill-space {
+  flex: 1 1 auto;
+}
+
+// app-search-bar {
+//   display: none;
+// }
+
+// app-search-bar.visible {
+//   display: inherit;
+// }

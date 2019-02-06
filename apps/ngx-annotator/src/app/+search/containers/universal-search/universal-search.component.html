@@ -1,0 +1,20 @@
+<app-search-bar (close)="closeSearchBar()" 
+  [class.visible]="showSearchBar$ | async"
+  [visible]="showSearchBar$ | async" (searchEmitter)=searchEmitterValue($event)>
+</app-search-bar>
+
+<router-outlet></router-outlet>
+
+<ng-container *ngIf="sizes$ | async as sizes">
+  <as-split direction="horizontal"
+    (dragStart)="splitDragStart($event)" 
+    (dragEnd)="splitDragEnd($event)" >
+    <as-split-area [size]="sizes[0]">
+      <router-outlet name="entity"></router-outlet>
+    </as-split-area>
+    <as-split-area [size]="sizes[1]">
+      <router-outlet name="document"></router-outlet>
+    </as-split-area>
+  </as-split>
+</ng-container>
+

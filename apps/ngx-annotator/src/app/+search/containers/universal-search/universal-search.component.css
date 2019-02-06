@@ -1,0 +1,11 @@
+as-split {
+  height: calc(100% - 96px);
+}
+
+app-search-bar {
+  display: none;
+}
+
+app-search-bar.visible {
+  display: inherit;
+}

@@ -1,0 +1,29 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../dist/out-tsc/apps/ngx-annotator",
+    "types": [],
+    "baseUrl": "./",
+    "paths": {
+      "@root/*": [
+        "app/*"
+      ],
+      "@core/*": [
+        "app/core/*"
+      ],
+      "@shared/*": [
+        "app/shared/*"
+      ],
+      "@auth/*": [
+        "app/auth/*"
+      ],
+      "@environments/*": [
+        "environments/*"
+      ]
+    }
+  },
+  "exclude": [
+    "test.ts",
+    "**/*.spec.ts"
+  ]
+}
