@@ -1,9 +1,23 @@
-<p>
-  document-search-summary works!
-</p>
+<mat-chip-list *ngIf="(activeCategory$ | async)?.name">
+    <mat-chip  (removed)="remove()">
+        {{(activeCategory$ | async)?.name}}
+        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+    </mat-chip>
+</mat-chip-list>
 
 <!-- <code>{{(documentSearch$|async)}}</code> -->
+<div class="document-main">
+  <div [ngClass]="{'app-document-search':(bookSelect$ | async)?.id}">
+    <app-document-search-preview-list (selectedFromCollectionPreview)="selectedFromCollectionPreview($event)" [books]="documentSearch$ | async" [tvseries]="documentSearchbyTvSeries$ | async" [people]="documentSearchByPeople$ | async" (searchBasedOnCategory)="searchBasedOnCategory($event)" [activeCategory]="activeCategory$ | async"></app-document-search-preview-list>
+  </div>
 
-<app-document-search-preview-list (selectedFromCollectionPreview)="selectedFromCollectionPreview($event)" [books]="documentSearch$ | async"></app-document-search-preview-list>
+<div *ngIf="(bookSelect$ | async)?.id">
+  <app-document-search-details 
+  [book]="bookSelect$ | async">
+  </app-document-search-details>
+</div>
+
+
+</div>
 
 

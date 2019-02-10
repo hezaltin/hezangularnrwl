@@ -54,5 +54,9 @@ export class UniversalSearchComponent implements OnInit {
   searchEmitterValue(event){
     console.log(event.searchValue)
     this.store.dispatch(new SearchActions.LoadSearch(event.searchValue))
+    this.store.dispatch(new SearchActions.LoadSearchByTelivisionSeries(event.searchValue))
+    this.store.dispatch(new SearchActions.LoadSearchByPeople(event.searchValue))
+    this.store.dispatch(new SearchActions.ResetSelectedItem())
+
   }
 }

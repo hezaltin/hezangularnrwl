@@ -13,4 +13,6 @@ export class SearchMetadataComponent implements OnInit {
   ngOnInit() {
   }
 
+
+
 }

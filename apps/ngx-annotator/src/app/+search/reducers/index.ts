@@ -35,11 +35,23 @@ export const getSearchDocumentSearchResults = createSelector(
   getSearchDocumentState,
   fromSearch.getDocumentSearch
 )
-
+export const getSearchDocumentSearchResultsByTelevision = createSelector(
+  getSearchDocumentState,
+  fromSearch.getDocumentSearchByTvSeries
+)
+export const getSearchDocumentSearchResultsByPeople = createSelector(
+  getSearchDocumentState,
+  fromSearch.getDocumentSearchByPeople
+)
 export const getSearchDocumentSelectedResult = createSelector(
   getSearchDocumentState,
   fromSearch.getSelectedResult
 )
+export const getActiveCategoryResult = createSelector(
+  getSearchDocumentState,
+  fromSearch.getActiveCategory
+)
+
 // Document State
 export const getDocumentState = createSelector(
   getSearchState,

@@ -1,5 +1,9 @@
 :host {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
+  }
+
+  .pointer-set{
+    cursor: pointer;
   }

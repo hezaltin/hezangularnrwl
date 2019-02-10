@@ -15,26 +15,20 @@ export class DocumentSearchPreviewComponent implements OnInit {
   }
 
   get title() {
-    return this.book.volumeInfo.title;
+    return this.book.original_title ? this.book.original_title : this.book.name;
   }
 
   get subtitle() {
-    return this.book.volumeInfo.subtitle;
+
+    return this.book.original_title ? this.book.original_title : this.book.name;
   }
 
   get description() {
-    return this.book.volumeInfo.description;
+    return this.book.overview;
   }
 
   get thumbnail(): string | boolean {
-    if (this.book.volumeInfo.imageLinks) {
-      return this.book.volumeInfo.imageLinks.smallThumbnail.replace(
-        'http:',
-        ''
-      );
-    }
-
-    return false;
+    return this.book.poster_path
   }
 
   constructor() { }
