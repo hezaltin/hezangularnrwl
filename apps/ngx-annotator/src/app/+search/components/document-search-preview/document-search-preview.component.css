@@ -4,6 +4,7 @@
 
   :host a {
     display: flex;
+    color:blue
   }
   .mat-card-subtitle{
     margin-top: 14px !important;
@@ -49,4 +50,9 @@
   }
   mat-card-footer {
     padding: 0 25px 25px;
+  }
+
+  .mat-title-span{
+    text-decoration: none;
+    color:blue
   }

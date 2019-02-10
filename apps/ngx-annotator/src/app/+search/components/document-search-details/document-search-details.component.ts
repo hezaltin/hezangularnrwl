@@ -18,26 +18,24 @@ export class DocumentSearchDetailsComponent implements OnInit {
   }
 
   get title() {
-    return this.book.volumeInfo.title;
+    return this.book.original_title ? this.book.original_title : this.book.name;
   }
 
   get subtitle() {
-    return this.book.volumeInfo.subtitle;
+    return this.book.original_title ? this.book.original_title : this.book.name;
   }
 
   get description() {
-    return this.book.volumeInfo.description;
+    return this.book.overview;
   }
-  get authors() {
-    return this.book.volumeInfo.authors;
-  }
+ 
 
   get thumbnail() {
-    return (
-      this.book.volumeInfo.imageLinks &&
-      this.book.volumeInfo.imageLinks.smallThumbnail &&
-      this.book.volumeInfo.imageLinks.smallThumbnail.replace('http:', '')
-    );
+    return this.book.poster_path
+  }
+
+  get votecount(){
+    return this.book.vote_count
   }
 
 }

@@ -1,1 +1,32 @@
-<app-document-search-preview (selectedFromCollectionPreviewList)="selectedFromCollectionPreview.emit($event)" *ngFor="let book of books?.items" [book]="book"></app-document-search-preview>
+<div *ngIf="(activeCategory?.name == 'movies' || !activeCategory) &&  books?.results">
+    <div class="pointer-set">
+        <button mat-icon-button >
+            <mat-icon aria-label="Search database">movie</mat-icon>
+        </button>
+        <span (click)="searchBasedOnCategory.emit({name:'movies'})">Movies</span>
+    </div>
+        <app-document-search-preview (selectedFromCollectionPreviewList)="selectedFromCollectionPreview.emit($event)" *ngFor="let book of books?.results" [book]="book"></app-document-search-preview>
+</div>
+
+<div *ngIf="(activeCategory?.name == 'televisionseries' || !activeCategory) &&  books?.results">
+        <div class="pointer-set">
+            <button mat-icon-button >
+                <mat-icon aria-label="Search database">home</mat-icon>
+            </button>
+            <span (click)="searchBasedOnCategory.emit({name:'televisionseries'})">Telivison Series</span>
+        </div>
+            <app-document-search-preview (selectedFromCollectionPreviewList)="selectedFromCollectionPreview.emit($event)" *ngFor="let book of tvseries?.results" [book]="book"></app-document-search-preview>
+    </div>
+
+    <div *ngIf="(activeCategory?.name == 'people' || !activeCategory) &&  books?.results">
+        <div class="pointer-set">
+            <button mat-icon-button >
+                <mat-icon aria-label="Search database">people</mat-icon>
+            </button>
+            <span (click)="searchBasedOnCategory.emit({name:'people'})">People</span>
+        </div>
+            <app-document-search-preview (selectedFromCollectionPreviewList)="selectedFromCollectionPreview.emit($event)" *ngFor="let book of people?.results" [book]="book"></app-document-search-preview>
+    </div>
+
+    <div *ngIf="!books?.results">List is not Available</div>
+    

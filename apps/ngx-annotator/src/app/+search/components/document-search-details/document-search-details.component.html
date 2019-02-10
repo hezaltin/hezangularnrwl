@@ -1,29 +1,22 @@
 
 
 <mat-card *ngIf="book">
-  <mat-card-title-group>
-    <mat-card-title>{{ title }}</mat-card-title>
-    <mat-card-subtitle *ngIf="subtitle">{{ subtitle }}</mat-card-subtitle>
-    <img mat-card-sm-image *ngIf="thumbnail" [src]="thumbnail"/>
-  </mat-card-title-group>
+  <mat-card>
+    <span >{{id}}-{{ title }}</span>
+  <!-- <mat-card-title-group>
+    <img mat-card-sm-image *ngIf="thumbnail" src="http://image.tmdb.org/t/p/w185{{thumbnail}}"/>
+    <mat-card-title>{{ title | ellipsis:35 }}</mat-card-title>
+    <mat-card-subtitle *ngIf="subtitle">{{ subtitle | ellipsis:45 }}</mat-card-subtitle>
+    
+  </mat-card-title-group> -->
   <mat-card-content>
-    <p [innerHtml]="description"></p>
+    <p *ngIf="description">{{ description }}</p>
   </mat-card-content>
-  <mat-card-footer class="footer">
+  <mat-card-footer>
+      <mat-icon [matBadge]="votecount" matBadgeColor="warn">home</mat-icon>
     <!-- <bc-book-authors [book]="book"></bc-book-authors> -->
-    <h5 mat-subheader>Written By:</h5>
-    <span>
-      {{ authors | addcommas }}
-    </span>
   </mat-card-footer>
-  <mat-card-actions align="start">
-    <!-- <button mat-raised-button color="warn" *ngIf="inCollection" (click)="remove.emit(book)">
-    Remove Book from Collection
-    </button>
-
-    <button mat-raised-button color="primary" *ngIf="!inCollection" (click)="add.emit(book)">
-    Add Book to Collection
-    </button> -->
-  </mat-card-actions>
+</mat-card>
+  
 </mat-card>
 

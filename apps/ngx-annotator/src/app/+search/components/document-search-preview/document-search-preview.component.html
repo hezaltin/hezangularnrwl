@@ -1,9 +1,11 @@
 <mat-card (click)="selectedFromCollectionPreviewList.emit(book)">
-  <mat-card-title-group>
-    <img mat-card-sm-image *ngIf="thumbnail" [src]="thumbnail"/>
+    <span class="mat-title-span">{{id}}-{{ title | ellipsis:35 }}</span>
+  <!-- <mat-card-title-group>
+    <img mat-card-sm-image *ngIf="thumbnail" src="http://image.tmdb.org/t/p/w185{{thumbnail}}"/>
     <mat-card-title>{{ title | ellipsis:35 }}</mat-card-title>
     <mat-card-subtitle *ngIf="subtitle">{{ subtitle | ellipsis:45 }}</mat-card-subtitle>
-  </mat-card-title-group>
+    
+  </mat-card-title-group> -->
   <mat-card-content>
     <p *ngIf="description">{{ description | ellipsis }}</p>
   </mat-card-content>
