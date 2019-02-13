@@ -12,29 +12,33 @@ export class SearchService {
     private http: HttpClient,
   ) { }
 
-  getSearchResults(queryTitle){
-    console.log(queryTitle)
+  getSearchResults(query){
+    console.log(query)
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
-     //let makeSerchUrl =`https://www.googleapis.com/books/v1/volumes?q=${queryTitle}`;
-     let makeSerchUrl  = `https://api.themoviedb.org/3/search/movie?api_key=90151c448e96b4fafd5c03586224e1fb&language=en-US&query=${queryTitle}&page=1&include_adult=false`
+    const queryName = query.searchvalue
+     //let makeSerchUrl =`https://www.googleapis.com/books/v1/volumes?q=${queryName}`;
+     let makeSerchUrl  = `https://api.themoviedb.org/3/search/movie?api_key=90151c448e96b4fafd5c03586224e1fb&language=en-US&query=${queryName}&page=1&include_adult=false`
     return this.http.get(makeSerchUrl);
    
   }
 
-  getSearchResultsByTelivisionSeries(queryTitle){
-    console.log(queryTitle)
+  getSearchResultsByTelivisionSeries(query){
+    console.log(query)
+    const queryName = query.searchvalue
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
-     //let makeSerchUrl =`https://www.googleapis.com/books/v1/volumes?q=${queryTitle}`;
-     let makeSerchUrl  = `https://api.themoviedb.org/3/search/tv?api_key=90151c448e96b4fafd5c03586224e1fb&language=en-US&query=${queryTitle}&page=1&include_adult=false`
+     //let makeSerchUrl =`https://www.googleapis.com/books/v1/volumes?q=${queryName}`;
+     let makeSerchUrl  = `https://api.themoviedb.org/3/search/tv?api_key=90151c448e96b4fafd5c03586224e1fb&language=en-US&query=${queryName}&page=1&include_adult=false`
     return this.http.get(makeSerchUrl);
    
   }
 
-  getSearchResultsByPeople(queryTitle){
-    console.log(queryTitle)
+  getSearchResultsByPeople(query){
+
+    console.log(query)
+    const queryName = query.searchvalue
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
-     //let makeSerchUrl =`https://www.googleapis.com/books/v1/volumes?q=${queryTitle}`;
-     let makeSerchUrl  = `https://api.themoviedb.org/3/search/person?api_key=90151c448e96b4fafd5c03586224e1fb&language=en-US&query=${queryTitle}&page=1&include_adult=false`
+     //let makeSerchUrl =`https://www.googleapis.com/books/v1/volumes?q=${queryName}`;
+     let makeSerchUrl  = `https://api.themoviedb.org/3/search/person?api_key=90151c448e96b4fafd5c03586224e1fb&language=en-US&query=${queryName}&page=1&include_adult=false`
     return this.http.get(makeSerchUrl);
    
   }

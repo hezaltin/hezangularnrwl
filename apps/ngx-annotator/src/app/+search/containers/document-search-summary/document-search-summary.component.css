@@ -6,3 +6,8 @@
     display:flex;
     flex-direction: row
 }
+
+.fixed-layout{
+    position: fixed;
+   margin:30px
+}
