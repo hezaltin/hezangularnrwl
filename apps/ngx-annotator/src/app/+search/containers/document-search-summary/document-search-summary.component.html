@@ -12,9 +12,12 @@
   </div>
 
 <div *ngIf="(bookSelect$ | async)?.id">
-  <app-document-search-details 
-  [book]="bookSelect$ | async">
-  </app-document-search-details>
+  <div class="fixed-layout">
+      <app-document-search-details 
+      [book]="bookSelect$ | async">
+      </app-document-search-details>
+  </div>
+ 
 </div>
 
 

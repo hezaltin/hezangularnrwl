@@ -49,7 +49,7 @@ export class GlanceDocumentsError implements Action {
 export class LoadSearch implements Action {
   readonly type = SearchActionTypes.LoadSearch
 
-  constructor(public payload: string) {}
+  constructor(public payload: any) {}
 }
 
 export class LoadSearchComplete implements Action {
@@ -66,7 +66,7 @@ export class LoadSearchError implements Action {
 export class LoadSearchByTelivisionSeries implements Action {
   readonly type = SearchActionTypes.LoadSearchByTelivisionSeries
 
-  constructor(public payload: string) {}
+  constructor(public payload: any) {}
 }
 
 export class LoadSearchCompleteByTelivisionSeries implements Action {
@@ -84,7 +84,7 @@ export class LoadSearchErrorByTelivisionSeries implements Action {
 export class LoadSearchByPeople implements Action {
   readonly type = SearchActionTypes.LoadSearchByPeople
 
-  constructor(public payload: string) {}
+  constructor(public payload: any) {}
 }
 
 export class LoadSearchCompleteByPeople implements Action {

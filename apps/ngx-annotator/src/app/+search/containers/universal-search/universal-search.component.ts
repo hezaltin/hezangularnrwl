@@ -18,6 +18,8 @@ import * as SearchActions from '../../actions/search.actions'
 export class UniversalSearchComponent implements OnInit {
   sizes$: Observable<number[]>
   showSearchBar$: Observable<boolean>
+  activeCategory:any;
+  searchEventValue:string
 
   constructor(private store: Store<any>) {
     this.sizes$ = store.pipe(
@@ -29,6 +31,19 @@ export class UniversalSearchComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    const activeCategoryObserve =  this.store.pipe(select(fromSearch.getActiveCategoryResult)).subscribe(category=>{
+      this.activeCategory = category;
+      if(!this.searchEventValue){
+        return
+      }
+      if(!this.activeCategory){
+        this.inActiveCategoryBasedAction(this.searchEventValue)
+        return 
+     }
+     this.activeCategoryBasedAction(this.activeCategory.name,this.searchEventValue);
+    
+    })
   }
 
   splitDragStart(event) {
@@ -52,11 +67,34 @@ export class UniversalSearchComponent implements OnInit {
   }
 
   searchEmitterValue(event){
-    console.log(event.searchValue)
-    this.store.dispatch(new SearchActions.LoadSearch(event.searchValue))
-    this.store.dispatch(new SearchActions.LoadSearchByTelivisionSeries(event.searchValue))
-    this.store.dispatch(new SearchActions.LoadSearchByPeople(event.searchValue))
-    this.store.dispatch(new SearchActions.ResetSelectedItem())
+    this.searchEventValue =  event.searchValue;
+   this.store.dispatch(new SearchActions.ResetSelectedItem())
+   if(!this.activeCategory){
+      this.inActiveCategoryBasedAction(this.searchEventValue)
+    return 
+   }
+   this.activeCategoryBasedAction(this.activeCategory.name,this.searchEventValue);
 
+  }
+
+  inActiveCategoryBasedAction(searchValue){
+    this.store.dispatch(new SearchActions.LoadSearch({searchvalue:searchValue,isActive:false}))
+    this.store.dispatch(new SearchActions.LoadSearchByTelivisionSeries({searchvalue:searchValue,isActive:false}))
+    this.store.dispatch(new SearchActions.LoadSearchByPeople({searchvalue:searchValue,isActive:false}))
+  }
+
+  activeCategoryBasedAction(name,searchValue){
+      let initiateAction = {
+        'movies' : () =>{
+            return this.store.dispatch(new SearchActions.LoadSearch({searchvalue:searchValue,isActive:true}))
+        },
+        'televisionseries' :() =>{
+            return this.store.dispatch(new SearchActions.LoadSearchByTelivisionSeries({searchvalue:searchValue,isActive:true}))
+        },
+        'people' : () =>{
+          return  this.store.dispatch(new SearchActions.LoadSearchByPeople({searchvalue:searchValue,isActive:true}))
+        }
+      }
+      return (initiateAction[name]) ();
   }
 }
