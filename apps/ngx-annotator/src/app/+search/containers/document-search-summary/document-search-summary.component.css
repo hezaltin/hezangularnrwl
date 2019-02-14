@@ -11,3 +11,9 @@
     position: fixed;
    margin:30px
 }
+
+.result-filter-container{
+    display: flex;
+    justify-content: space-evenly;
+    
+}
