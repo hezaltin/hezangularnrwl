@@ -1,3 +1,70 @@
+
+
+<div>
+
+  <mat-accordion>
+    <mat-expansion-panel (opened)="panelOpenState = true"
+    (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+    <mat-panel-title>
+    Result Filter
+    </mat-panel-title>
+    <!-- <mat-panel-description>
+    Currently I am {{panelOpenState ? 'open' : 'closed'}}
+    </mat-panel-description> -->
+
+    </mat-expansion-panel-header>
+    <form  [formGroup]="resultFilter">
+      <div class="result-filter-container">   
+          <mat-card>
+              <mat-card-header>
+                  <mat-card-subtitle>Language</mat-card-subtitle>
+              </mat-card-header>
+              <mat-card-content>
+                  <div  *ngFor="let language of languageControl.controls; let i=index">
+                      <mat-checkbox class="example-margin" [formControl]="language">{{languageData[i].name}}</mat-checkbox>
+                    </div>
+              </mat-card-content>
+          </mat-card>
+         
+          <mat-card>
+              <mat-card-header>
+                  <mat-card-subtitle>Region</mat-card-subtitle>
+              </mat-card-header>
+              <mat-card-content>
+                  <div  *ngFor="let region of regionControl.controls; let i=index">
+                      <mat-checkbox class="example-margin" [formControl]="region">{{regionData[i].name}}</mat-checkbox>
+                    </div>
+              </mat-card-content>
+             
+          </mat-card>
+         
+          <mat-card>
+              <mat-card-header>
+                  <mat-card-subtitle>Year</mat-card-subtitle>
+              </mat-card-header>
+              <mat-card-content>
+                  <div  *ngFor="let year of yearControl.controls; let i=index">
+                      <mat-checkbox class="example-margin" [formControl]="year">{{yearData[i].name}}</mat-checkbox>
+                    </div>
+              </mat-card-content>
+             
+          
+          </mat-card>
+      </div>
+     
+    
+    </form>
+    </mat-expansion-panel>
+  
+  </mat-accordion>
+
+</div>
+
+
+
+
+
 <mat-chip-list *ngIf="(activeCategory$ | async)?.name">
     <mat-chip  (removed)="remove()">
         {{(activeCategory$ | async)?.name}}
