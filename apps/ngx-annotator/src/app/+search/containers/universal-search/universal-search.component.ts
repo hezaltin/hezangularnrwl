@@ -19,7 +19,8 @@ export class UniversalSearchComponent implements OnInit {
   sizes$: Observable<number[]>
   showSearchBar$: Observable<boolean>
   activeCategory:any;
-  searchEventValue:string
+  searchEventValue:string;
+  activeFilters:any;
 
   constructor(private store: Store<any>) {
     this.sizes$ = store.pipe(
@@ -35,14 +36,31 @@ export class UniversalSearchComponent implements OnInit {
     const activeCategoryObserve =  this.store.pipe(select(fromSearch.getActiveCategoryResult)).subscribe(category=>{
       this.activeCategory = category;
       if(!this.searchEventValue){
+
         return
       }
       if(!this.activeCategory){
-        this.inActiveCategoryBasedAction(this.searchEventValue)
+        this.inActiveCategoryBasedAction(this.searchEventValue,this.activeFilters)
         return 
      }
-     this.activeCategoryBasedAction(this.activeCategory.name,this.searchEventValue);
+     this.activeCategoryBasedAction(this.activeCategory.name,this.searchEventValue,this.activeFilters);
     
+    });
+
+    const activeFiltersWithCategoryObservable = this.store.pipe(select(fromSearch.getActiveFiltersLayer)).subscribe(filterLayer=>{
+      console.log('filterLayer===>',filterLayer)
+      if(!filterLayer){
+        return 
+      }
+      this.activeFilters = filterLayer
+      if(!this.searchEventValue){
+        return
+      }
+      if(!this.activeCategory){
+        this.inActiveCategoryBasedAction(this.searchEventValue,this.activeFilters)
+        return 
+     }
+     this.activeCategoryBasedAction(this.activeCategory.name,this.searchEventValue,this.activeFilters);
     })
   }
 
@@ -69,30 +87,31 @@ export class UniversalSearchComponent implements OnInit {
   searchEmitterValue(event){
     this.searchEventValue =  event.searchValue;
    this.store.dispatch(new SearchActions.ResetSelectedItem())
+   this.store.dispatch(new SearchActions.SearchValueChangesAction(event.searchValue))
    if(!this.activeCategory){
-      this.inActiveCategoryBasedAction(this.searchEventValue)
+      this.inActiveCategoryBasedAction(this.searchEventValue,this.activeFilters)
     return 
    }
-   this.activeCategoryBasedAction(this.activeCategory.name,this.searchEventValue);
+   this.activeCategoryBasedAction(this.activeCategory.name,this.searchEventValue,this.activeFilters);
 
   }
 
-  inActiveCategoryBasedAction(searchValue){
-    this.store.dispatch(new SearchActions.LoadSearch({searchvalue:searchValue,isActive:false}))
-    this.store.dispatch(new SearchActions.LoadSearchByTelivisionSeries({searchvalue:searchValue,isActive:false}))
-    this.store.dispatch(new SearchActions.LoadSearchByPeople({searchvalue:searchValue,isActive:false}))
+  inActiveCategoryBasedAction(searchValue,filterValue){
+    this.store.dispatch(new SearchActions.LoadSearch({searchvalue:searchValue,isActive:false,filterValue:filterValue}))
+    this.store.dispatch(new SearchActions.LoadSearchByTelivisionSeries({searchvalue:searchValue,isActive:false,filterValue:filterValue}))
+    this.store.dispatch(new SearchActions.LoadSearchByPeople({searchvalue:searchValue,isActive:false,filterValue:filterValue}))
   }
 
-  activeCategoryBasedAction(name,searchValue){
+  activeCategoryBasedAction(name,searchValue,filterValue){
       let initiateAction = {
         'movies' : () =>{
-            return this.store.dispatch(new SearchActions.LoadSearch({searchvalue:searchValue,isActive:true}))
+            return this.store.dispatch(new SearchActions.LoadSearch({searchvalue:searchValue,isActive:true,filterValue:filterValue}))
         },
         'televisionseries' :() =>{
-            return this.store.dispatch(new SearchActions.LoadSearchByTelivisionSeries({searchvalue:searchValue,isActive:true}))
+            return this.store.dispatch(new SearchActions.LoadSearchByTelivisionSeries({searchvalue:searchValue,isActive:true,filterValue:filterValue}))
         },
         'people' : () =>{
-          return  this.store.dispatch(new SearchActions.LoadSearchByPeople({searchvalue:searchValue,isActive:true}))
+          return  this.store.dispatch(new SearchActions.LoadSearchByPeople({searchvalue:searchValue,isActive:true,filterValue:filterValue}))
         }
       }
       return (initiateAction[name]) ();

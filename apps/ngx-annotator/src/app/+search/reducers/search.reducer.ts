@@ -9,7 +9,9 @@ export interface State {
  loading:boolean;
  type:any;
  getSelectedSearchItem:any,
- getActiveSelectedCategory:any
+ getActiveSelectedCategory:any,
+ filterOptionValues:any,
+ SearchValueInput:any
 }
 
 export const initialState: State = {
@@ -19,7 +21,9 @@ export const initialState: State = {
   loading:false,
   type:null,
   getSelectedSearchItem:null,
-  getActiveSelectedCategory:null
+  getActiveSelectedCategory:null,
+  filterOptionValues:null,
+  SearchValueInput: null
 
 };
 
@@ -139,6 +143,25 @@ export function reducer(state = initialState, action: SearchActions): State {
         loading: false,
        
       }
+
+    }
+
+    case SearchActionTypes.FilterOptionHolding: {
+      console.log(action)
+      return {
+        ...state,
+        filterOptionValues:action.payload
+       
+      }
+    }
+
+    case SearchActionTypes.SearchValueChangesAction: {
+      console.log(action)
+      return {
+        ...state,
+        SearchValueInput:action.payload && action.payload.length=== 0 ? false : true
+       
+      }
     }
     
     
@@ -155,3 +178,6 @@ export const getDocumentSearchByTvSeries = (state: State) => state.serachResults
 export const getDocumentSearchByPeople = (state: State) => state.serachResultsByPeople
 export const getSelectedResult = (state:State) => state.getSelectedSearchItem
 export const getActiveCategory = (state:State) => state.getActiveSelectedCategory
+export const getActiveFilters = (state:State) => state.filterOptionValues
+export const getSerchInputChanges = (state:State) => state.SearchValueInput;
+

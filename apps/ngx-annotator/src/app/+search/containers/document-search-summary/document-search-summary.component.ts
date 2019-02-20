@@ -28,9 +28,11 @@ export class DocumentSearchSummaryComponent implements OnInit {
     {name: 'Apple'},
   ];
   selectable = true;
-  languageData = [{name:'en',id:1,selected:true},{name:'ta',id:2,selected:true}];
- regionData = [{name:'US',id:1,selected:true},{name:'UK',id:2,selected:true},{name:'IN',id:2,selected:true}];
- yearData =[{name:1995,id:1,selected:true},{name:2000,id:2,selected:true},{name:2017,id:2,selected:true}]
+  languageData = [{name:'en',id:1,selected:false},{name:'ta',id:2,selected:false}];
+ regionData = [{name:'US',id:1,selected:false},{name:'UK',id:2,selected:false},{name:'IN',id:3,selected:false}];
+ yearData =[{name:1995,id:1,selected:false},{name:2000,id:2,selected:false},{name:2017,id:3,selected:false}];
+   setFiltersKeys = ['language','region','year'];
+   isSearchValid$:Observable<any>;
   constructor( private store: Store<fromSearch.State>,private fb:FormBuilder) { 
    
   }
@@ -54,11 +56,43 @@ export class DocumentSearchSummaryComponent implements OnInit {
   this.yearData.map(item=>{
     this.yearControl.push(this.fb.control(item.selected))
   })
-   
-  console.log(this.languageControl)
+  let initialFilterOptions = this.getFilterOptionsData(this.resultFilter.value);
+  console.log('initialFilterOptions====>',initialFilterOptions);
+  this.filterOptionEventDispatch(initialFilterOptions)
+  console.log(this.resultFilter.value)
+
     this.resultFilter.valueChanges.subscribe(name=>{
       console.log(name)
-    })
+      let getFilterOptions = this.getFilterOptionsData(name)
+      console.log(getFilterOptions)
+      this.filterOptionEventDispatch(getFilterOptions)
+    });
+
+    this.isSearchValid$ = this.store.pipe(select(fromSearch.getSearchInputValue));
+  }
+
+  getFilterOptionsData(options){
+    console.log(options)
+        let optionsLanguage = this.languageData.filter((item,index)=>{
+          return options.language[index] === true
+        })
+        let optionsregion = this.regionData.filter((item,index)=>{
+          return options.region[index] === true;
+        })
+        let optionsyear = this.yearData.filter((item,index)=> {
+          return  options.year[index] === true;
+        });
+
+        let setMultDImension = [[...optionsLanguage],[...optionsregion],[...optionsyear]]
+        console.log(setMultDImension)
+        let filterOptions = this.setFiltersKeys.reduce((all,item,index)=>{
+                  all[item] = setMultDImension[index];
+            return all
+        },{})
+
+        return filterOptions
+
+
   }
 
   get languageControl(){
@@ -93,6 +127,10 @@ export class DocumentSearchSummaryComponent implements OnInit {
   remove(): void {
     this.store.dispatch(new SearchActions.RemoveActiveCategory())
     this.store.dispatch(new SearchActions.ResetSelectedItem())
+  }
+
+  filterOptionEventDispatch(payload){
+      this.store.dispatch(new SearchActions.FilterOptionHolding(payload))
   }
 
 }
