@@ -18,8 +18,9 @@ export enum SearchActionTypes {
   LoadSearchErrorByPeople  = '[Search] Search Documents Error By People ',
   ResetSelectedItem = '[Search] Reset Selected Search Item Details',
   GetActiveSelectedCategory = '[Search] Set Active Selected Category',
-  RemoveActiveCategory = '[Search] Remove the Active Category'
-
+  RemoveActiveCategory = '[Search] Remove the Active Category',
+  FilterOptionHolding = '[Search] Filter Options Changes',
+  SearchValueChangesAction = '[Search] Search Value Changes Action'
 }
 
 export class GlanceEntities implements Action {
@@ -122,6 +123,18 @@ export class RemoveActiveCategory implements Action {
   constructor() {}
 }
 
+export class FilterOptionHolding implements Action {
+  readonly type = SearchActionTypes.FilterOptionHolding
+
+  constructor(public payload:any) {}
+}
+
+export class SearchValueChangesAction implements Action {
+  readonly type = SearchActionTypes.SearchValueChangesAction
+
+  constructor(public payload:any) {}
+}
+
 
 export type SearchActions = 
   | GlanceEntities
@@ -141,4 +154,6 @@ export type SearchActions =
   |ResetSelectedItem
   |GetActiveSelectedCategory
   |RemoveActiveCategory
+  |FilterOptionHolding
+  |SearchValueChangesAction
   

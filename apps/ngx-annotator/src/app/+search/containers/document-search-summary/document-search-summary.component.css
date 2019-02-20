@@ -9,7 +9,7 @@
 
 .fixed-layout{
     position: fixed;
-   margin:30px
+   margin:30px;
 }
 
 .result-filter-container{
@@ -17,3 +17,7 @@
     justify-content: space-evenly;
     
 }
+.mat-result-filter-container{
+    z-index: 100;
+    position: relative;
+} 

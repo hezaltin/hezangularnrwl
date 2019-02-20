@@ -1,7 +1,7 @@
 :host {
     display: flex;
     justify-content: center;
-    margin: 75px 0;
+    margin: 25px 0;
   }
   mat-card {
     max-width: 600px;

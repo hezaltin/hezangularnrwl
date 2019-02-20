@@ -35,6 +35,7 @@ export const getSearchDocumentSearchResults = createSelector(
   getSearchDocumentState,
   fromSearch.getDocumentSearch
 )
+
 export const getSearchDocumentSearchResultsByTelevision = createSelector(
   getSearchDocumentState,
   fromSearch.getDocumentSearchByTvSeries
@@ -50,6 +51,16 @@ export const getSearchDocumentSelectedResult = createSelector(
 export const getActiveCategoryResult = createSelector(
   getSearchDocumentState,
   fromSearch.getActiveCategory
+)
+
+export const getActiveFiltersLayer = createSelector(
+  getSearchDocumentState,
+  fromSearch.getActiveFilters
+)
+
+export const getSearchInputValue = createSelector(
+  getSearchDocumentState,
+  fromSearch.getSerchInputChanges
 )
 
 // Document State
